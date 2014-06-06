@@ -2,7 +2,8 @@
 
 angular
   .module('clickQuestApp', [
-    'ngRoute'
+    'ngRoute',
+    'RecursionHelper'
   ])
   .config(function ($routeProvider) {
     $routeProvider

@@ -1,0 +1,82 @@
+<li class='list-group-item'>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Name</label>
+
+    <div class="col-sm-9">
+      <input type="text" class="form-control" placeholder="Event Name" ng-model="task.name">
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="description" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-9">
+      <textarea class="form-control" rows="2" ng-model="task.description"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="type" class="col-sm-2 control-label">Type</label>
+    <div class="col-sm-9">
+      <select class="form-control" ng-model="task.type">
+        <option>task</option>
+        <option>orderedTask</option>
+        <option>unorderedTask</option>
+        <option>randomTask</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="alert alert-danger" ng-if="task.type == 'task' && task.subTasks.length > 0">Base tasks will not actually run any of their subtasks!</div>
+  <div class="alert alert-danger" ng-if="task.type !== 'task' && task.subTasks.length == 0">This task requires sub tasks!</div>
+
+ <div class="form-group">
+    <span ng-if="$parent.task.type == 'randomTask'">
+      <label for="weight" class="col-sm-2 control-label">Weight</label>
+      <div class="col-sm-2">
+        <input type="number" class="form-control" ng-model="task.weight">
+      </div>
+    </span>
+
+    <span ng-if="task.type == 'randomTask' || task.type == 'task'">
+      <label for="duration" class="col-sm-2 control-label">Duration</label>
+      <div class="col-sm-2">
+        <input type="number" class="form-control" ng-model="task.duration">
+      </div>
+    </span>
+
+    <span ng-if="$parent.task.type === 'randomTask'">
+      <label for="reward" class="col-sm-2 control-label">Reward</label>
+      <div class="col-sm-2">
+        <input type="number" class="form-control" ng-model="task.reward">
+      </div>
+    </span>
+  </div>
+
+  </span>
+</form>
+
+<button type="button" class="btn btn-default btn-sm" ng-if="task.type !== 'task'" ng-click="task.addSubTask()">
+  <span class="glyphicon glyphicon-plus"></span> New Subtask
+</button>
+
+<button type="button" class="btn btn-default btn-sm" ng-click="$parent.task.removeSubTask(task)">
+  <span class="glyphicon glyphicon-trash"></span> Delete
+</button>
+
+<button type="button" class="btn btn-default btn-sm" ng-click="$parent.task.promoteSubTask(task)">
+  <span class="glyphicon glyphicon-arrow-up"></span> Up
+</button>
+
+<button type="button" class="btn btn-default btn-sm" ng-click="$parent.task.demoteSubTask(task)">
+  <span class="glyphicon glyphicon-arrow-down"></span> Down
+</button>
+
+<ul ng-if="task.subTasks.length > 0">
+  <p></p>
+  <span ng-animate="'animate'" ng-repeat="subTask in task.subTasks">
+    <task task="subTask"></task>
+  </span>
+</ul>
+</li>
