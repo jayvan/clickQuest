@@ -7,9 +7,9 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+      .when('/edit_tasks', {
+        templateUrl: 'views/edit_tasks.html',
+        controller: 'TaskEditCtrl'
       })
       .otherwise({
         redirectTo: '/'

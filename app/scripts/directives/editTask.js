@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('clickQuestApp')
-  .directive('task', ['RecursionHelper', function (RecursionHelper) {
+  .directive('taskEdit', ['RecursionHelper', function (RecursionHelper) {
     return {
-      templateUrl: 'views/templates/task.html',
+      templateUrl: 'views/templates/task_edit.html',
       scope: {
         'task': '='
       },
