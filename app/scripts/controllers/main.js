@@ -2,9 +2,11 @@
 
 angular.module('clickQuestApp')
   .controller('MainCtrl', ['$interval', '$scope', 'Character', function ($interval, $scope, Character) {
-    var character = new Character();
+    $scope.character = new Character();
 
     $interval(function() {
-      character.tick();
+      $scope.character.tick();
     }, 1000);
+
+
   }]);

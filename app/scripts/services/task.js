@@ -24,6 +24,10 @@ angular.module('clickQuestApp')
       console.log(this.name + " is now " + this.progress + "/" + this.duration);
     };
 
+    Task.prototype.percentComplete = function() {
+      return Math.round(this.progress / this.duration * 100);
+    };
+
     // Returns true if the task is complete, false otherwise
     Task.prototype.isCompleted = function() {
       return this.progress >= this.duration;

@@ -1,8 +1,44 @@
-<div class='container'>
-<ul>
-  <li ng-repeat="thing in awesomeThings">
-    {{thing}}
-  </li
-</ul>
+<p></p>
+<div class='row'>
+  <div class='col-md-4'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class='panel-title'>Character</h3>
+      </div>
+      <div class="panel-body">
+        <p>{{character.name}} the {{character.race}} {{character.klass}}</p>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-4'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title" ng-bind="character.activeTask().name"></h3>
+      </div>
+      <div class="panel-body">
+        <p ng-bind="character.activeTask().description"></p>
+        <div class="progress progress-striped active">
+          <div class="progress-bar" role="progressbar" ng-style="{width: character.activeTask().percentComplete() + '%'}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-4'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class='panel-title'>Quest Log</h3>
+      </div>
+      <div class="panel-body">
+        <span ng-repeat="task in character.longTasks()">
+          <h4 ng-bind="task.name"></h4>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" ng-style="{width: task.percentComplete() + '%'}">
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
 
+  </div>
 </div>

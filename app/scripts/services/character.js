@@ -3,9 +3,21 @@
 angular.module('clickQuestApp')
   .factory('Character',['TaskManager', function (TaskManager) {
     var Character = function() {
+      this.name = "Jayvan";
+      this.race = "Goblin";
+      this.klass = "Warrior";
+      this.level = 1;
       this.tasks = [];
       this.tasks.unshift(TaskManager.getTask('root'));
       this.fillUpTasks();
+    };
+
+    Character.prototype.activeTask = function() {
+      return this.tasks[0];
+    };
+
+    Character.prototype.longTasks = function() {
+      return this.tasks.slice(1);
     };
 
     // Keep taking on new tasks until we have a base task
@@ -32,10 +44,13 @@ angular.module('clickQuestApp')
     Character.prototype.tick = function(progress) {
       progress = progress || 1;
 
-      this.tasks[0].addProgress(progress);
+      if (this.tasks[0].isCompleted()) {
+        this.completeTasks();
+        this.fillUpTasks();
+      } else {
+        this.tasks[0].addProgress(progress);
+      }
 
-      this.completeTasks();
-      this.fillUpTasks();
     };
 
     return Character;
