@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('clickQuestApp')
-  .directive('taskEdit', ['RecursionHelper', function (RecursionHelper) {
+  .directive('taskEdit', ['MonsterData', 'RecursionHelper', function (MonsterData, RecursionHelper) {
     return {
       templateUrl: 'views/templates/task_edit.html',
       scope: {
@@ -15,6 +15,9 @@ angular.module('clickQuestApp')
             // you can also pass an object with
             // a 'pre'- and 'post'-link function.
         });
+      },
+      controller: function($scope) {
+        $scope.monsters = MonsterData;
       }
     };
   }]);

@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('clickQuestApp')
-  .factory('TaskManager', ['OrderedTask', 'RandomTask', 'Task', 'TaskData', 'UnorderedTask', function (OrderedTask, RandomTask, Task, TaskData, UnorderedTask) {
+  .factory('TaskManager', ['CombatTask', 'OrderedTask', 'RandomTask', 'Task', 'TaskData', 'UnorderedTask', function (CombatTask, OrderedTask, RandomTask, Task, TaskData, UnorderedTask) {
     var exports = {};
 
     exports.serialize = function(task) {
       return JSON.stringify(task.serialize(),{},2);
     };
 
+    // Gets a task from the data and constructs it
     exports.getTask = function(taskName) {
       var taskInfo = angular.copy(TaskData[taskName]);
 
@@ -20,9 +21,12 @@ angular.module('clickQuestApp')
           return new UnorderedTask(taskInfo);
         case 'randomTask':
           return new RandomTask(taskInfo);
+        case 'combatTask':
+          return new CombatTask(taskInfo);
       }
     };
 
+    // Recursively constructs a task and subtasks
     exports.getTaskTree = function(taskName) {
       var taskInfo = angular.copy(TaskData[taskName]);
       taskInfo.subTasks = taskInfo.subTasks || [];

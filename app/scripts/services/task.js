@@ -21,9 +21,10 @@ angular.module('clickQuestApp')
     Task.prototype.addProgress = function(ticks) {
       ticks = ticks || 1;
       this.progress = Math.min(this.progress + ticks, this.duration);
-      console.log(this.name + " is now " + this.progress + "/" + this.duration);
     };
 
+    // Returns percentage of task completion
+    // Useful for progress bars
     Task.prototype.percentComplete = function() {
       return Math.round(this.progress / this.duration * 100);
     };
@@ -50,6 +51,7 @@ angular.module('clickQuestApp')
       return this.duration;
     };
 
+    // Deletes the given subtask from this task
     Task.prototype.removeSubTask = function(subTask) {
       var index = this.subTasks.indexOf(subTask);
       if (index !== -1) {
@@ -57,14 +59,17 @@ angular.module('clickQuestApp')
       }
     };
 
+    // Moves a subtask up one in the list
     Task.prototype.promoteSubTask = function(subTask) {
       this.moveSubTask(subTask, -1);
     };
 
+    // Moves a subtask down one in the list
     Task.prototype.demoteSubTask = function(subTask) {
       this.moveSubTask(subTask, 1);
     };
 
+    // Moves a subtask relative to it's current location in the list
     Task.prototype.moveSubTask = function(subTask, delta) {
       var index = this.subTasks.indexOf(subTask);
       if (index === -1 || index + delta < 0 || index + delta >= this.subTasks.length) {
@@ -76,10 +81,12 @@ angular.module('clickQuestApp')
       this.subTasks[index] = tmp;
     };
 
+    // Adds a new subtask to the end of the list
     Task.prototype.addSubTask = function() {
       this.subTasks.push(new Task());
     };
 
+    // Serialize the task's raw data for the monsterData file
     Task.prototype.serialize = function(taskData) {
       var getName = function(obj) {
         return obj.name;
@@ -87,7 +94,8 @@ angular.module('clickQuestApp')
 
       var blacklist = [
         '$$hashKey',
-        'progress'
+        'progress',
+        'monsterData'
       ];
       taskData = taskData || {};
       taskData[this.name] = {};

@@ -17,14 +17,17 @@ angular.module('clickQuestApp')
 
     OrderedTask.prototype = new Task();
 
+    // Progress to the next subtask
     OrderedTask.prototype.addProgress = function() {
       this.progress++;
     };
 
+    // Returns the next subtask in sequence
     OrderedTask.prototype.getNextTask = function() {
       return this.subTasks[this.progress];
     };
 
+    // Return the expected duration in seconds of the task
     OrderedTask.prototype.getEffectiveDuration = function() {
       var sum = 0;
       for (var i = 0; i < this.subTasks.length; i++) {

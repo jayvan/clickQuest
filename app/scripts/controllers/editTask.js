@@ -1,11 +1,15 @@
 'use strict';
 
 angular.module('clickQuestApp')
-  .controller('TaskEditCtrl', ['$scope', 'TaskManager', function ($scope, TaskManager) {
+  .controller('TaskEditCtrl', ['$routeParams', '$scope', 'MonsterData', 'TaskManager', function ($routeParams, $scope, MonsterData, TaskManager) {
 
-    $scope.testTask = TaskManager.getTaskTree('root');
+
+    var root = $routeParams.root || 'root';
+    $scope.testTask = TaskManager.getTaskTree(root);
 
     $scope.textOutput = function() {
       return TaskManager.serialize($scope.testTask);
     };
+
+    $scope.monsters = MonsterData;
   }]);

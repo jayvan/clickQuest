@@ -123,20 +123,33 @@ angular.module('clickQuestApp')
     "name": "Slay Town Pests",
     "description": "A variety of pests are bothering the townsfolk, slay them to prove your might.",
     "weight": 1,
-    "duration": 100,
+    "duration": 300,
     "reward": 10,
     "subTasks": [
-      "Fetid Rat"
+      "Fetid Rat",
+      "Green Slime"
     ],
     "type": "randomTask"
   },
   "Fetid Rat": {
     "name": "Fetid Rat",
-    "description": "You dispatch the fetid rat",
+    "description": "A disgusting rat slithers towards you. To arms!",
     "weight": 1,
     "duration": 10,
-    "reward": 10,
-    "type": "task"
+    "reward": 30,
+    "subTasks": [],
+    "type": "combatTask",
+    "monster": "Rat"
+  },
+  "Green Slime": {
+    "name": "Green Slime",
+    "description": "A nasty ass slime wriggles it's way over. To arms!",
+    "weight": 1,
+    "duration": 10,
+    "reward": 30,
+    "subTasks": [],
+    "type": "combatTask",
+    "monster": "Slime"
   },
   "Deliver Letters": {
     "name": "Deliver Letters",

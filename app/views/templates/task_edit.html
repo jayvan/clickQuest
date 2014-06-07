@@ -21,6 +21,7 @@
     <div class="col-sm-9">
       <select class="form-control" ng-model="task.type">
         <option>task</option>
+        <option>combatTask</option>
         <option>orderedTask</option>
         <option>unorderedTask</option>
         <option>randomTask</option>
@@ -28,8 +29,16 @@
     </div>
   </div>
 
-  <div class="alert alert-danger" ng-if="task.type == 'task' && task.subTasks.length > 0">Base tasks will not actually run any of their subtasks!</div>
-  <div class="alert alert-danger" ng-if="task.type !== 'task' && task.subTasks.length == 0">This task requires sub tasks!</div>
+  <div class="form-group" ng-if="task.type == 'combatTask'">
+    <label for="type" class="col-sm-2 control-label">Monster</label>
+    <div class="col-sm-9">
+      <select class="form-control" ng-model="task.monster" ng-options="name as name for (name, monster) in monsters">
+      </select>
+    </div>
+  </div>
+
+  <div class="alert alert-danger" ng-if="(task.type == 'task' || task.type == 'combatTask') && task.subTasks.length > 0">Base tasks will not actually run any of their subtasks!</div>
+  <div class="alert alert-danger" ng-if="task.type !== 'task' && task.type !== 'combatTask'  && task.subTasks.length == 0">This task requires sub tasks!</div>
 
  <div class="form-group">
     <span ng-if="$parent.task.type == 'randomTask'">
@@ -57,7 +66,7 @@
   </span>
 </form>
 
-<button type="button" class="btn btn-default btn-sm" ng-if="task.type !== 'task'" ng-click="task.addSubTask()">
+<button type="button" class="btn btn-default btn-sm" ng-if="task.type !== 'task' && task.type !== 'combatTask'" ng-click="task.addSubTask()">
   <span class="glyphicon glyphicon-plus"></span> New Subtask
 </button>
 
