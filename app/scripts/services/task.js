@@ -13,7 +13,7 @@ angular.module('clickQuestApp')
       this.duration = attrs.duration || 10;
       this.reward = attrs.reward || 10;
       this.subTasks = [];
-      this.progress = 0;
+      this.progress = attrs.progress || 0;
       this.type = 'task';
     };
 

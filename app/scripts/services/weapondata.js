@@ -3,13 +3,27 @@
 angular.module('clickQuestApp')
   .value('WeaponData',
 {
+  slot: 'weapon',
+  types: [
+    'sword',
+    'maceBlunt',
+    'maceSlash',
+    'gauntlet',
+    'dagger',
+    'spear',
+    'bow',
+    'crossbow',
+    'axe',
+    'hammer',
+    'staff'
+  ],
   sword: {
     bases: [
-      'short sword',
-      'long sword',
-      'bastard sword',
-      'rapier',
-      'scimitar'
+      'Short sword',
+      'Long sword',
+      'Bastard sword',
+      'Rapier',
+      'Scimitar'
     ],
     prefixes: [
       'Frosted',
@@ -155,7 +169,7 @@ angular.module('clickQuestApp')
       'assault'
     ]
   },
-  mace_blunt: {
+  maceBlunt: {
     bases: [
 
     ],
@@ -169,7 +183,7 @@ angular.module('clickQuestApp')
 
     ]
   },
-  mace_slash: {
+  maceSlash: {
     bases: [
 
     ],

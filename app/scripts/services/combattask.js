@@ -10,7 +10,7 @@ angular.module('clickQuestApp')
       this.monsterData = MonsterData[attr.monster];
       this.playerTurn = Math.random() > 0.5;
       this.duration = this.monsterData.size * 30;
-      this.type = "combatTask";
+      this.type = 'combatTask';
     };
 
 
@@ -21,15 +21,16 @@ angular.module('clickQuestApp')
       this.playerTurn = !this.playerTurn;
 
       if (this.playerTurn) {
-        return character.getCombatTask();
+        return character.getCombatTask(this.monster);
       } else {
         var enemyAttack = this.monsterData.actions[Math.floor(Math.random()*this.monsterData.actions.length)];
+        var duration = Math.round(Math.random() * 5) + 5;
 
         return new Task({
           name: this.monster,
           description: enemyAttack,
-          duration: Math.round(Math.random() * 10) + 5,
-          reward: 10
+          duration: duration,
+          reward: Math.min(duration, this.duration - this.progress - 1)
         });
       }
     };

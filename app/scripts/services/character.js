@@ -1,17 +1,40 @@
 'use strict';
 
 angular.module('clickQuestApp')
-  .factory('Character',['Task', 'TaskManager', function (Task, TaskManager) {
+  .factory('Character',['ItemManager', 'Task', 'TaskManager', 'WeaponData', function (ItemManager, Task, TaskManager, WeaponData) {
 
     // startingTask: The name of the first task the character does
     var Character = function(attr) {
-      this.name = 'Jayvan';
-      this.race = 'Goblin';
-      this.klass = 'Warrior';
-      this.level = 1;
+      attr = attr || {};
+      this.name = 'Jayvan' || attr.name;
+      this.race = 'Goblin' || attr.race;
+      this.klass = 'Warrior' || attr.klass;
+      this.level = 1 || attr.level;
+      this.equipment = {} || attr.equipment;
+
+      // Starter weapon
+      if (this.equipment.weapon === undefined) {
+        this.equip(ItemManager.generateEquipment('sword', 100));
+      }
+
       this.tasks = [];
-      this.tasks.unshift(TaskManager.getTask(attr.startingTask));
+      if (attr.tasks !== undefined) {
+        for (var i = 0; i < attr.tasks.length; i++) {
+          this.tasks[i] = TaskManager.constructTask(attr.tasks[i]);
+        }
+      } else {
+        this.tasks.unshift(TaskManager.getTask(attr.startingTask));
+      }
+
       this.fillUpTasks();
+    };
+
+    Character.prototype.save = function() {
+      localStorage.setItem('character', JSON.stringify(this));
+    };
+
+    Character.prototype.equip = function(item) {
+      this.equipment[item.slot] = item;
     };
 
     // Return the characters current active task
@@ -37,6 +60,8 @@ angular.module('clickQuestApp')
         }
         this.tasks.unshift(nextTask);
       }
+
+      this.save();
     };
 
     // Keep completing tasks until we reach an incomplete onej
@@ -62,12 +87,15 @@ angular.module('clickQuestApp')
     };
 
     // Get a combat task based on current weapon
-    Character.prototype.getCombatTask = function() {
+    Character.prototype.getCombatTask = function(monsterName) {
+      var verbs = WeaponData[this.equipment.weapon.type].verbs;
+      var verb = verbs[Math.floor(Math.random() * verbs.length)];
+      var description = 'You ' + verb + ' the ' + monsterName + ' with your ' + this.equipment.weapon.name;
       return new Task({
         name: 'Attacking',
-        description: 'You punch the enemy',
-        duration: Math.round(Math.random() * 10) + 5,
-        reward: 10
+        description: description,
+        duration: Math.round(Math.random() * 5) + 5,
+        reward: Math.round(Math.random() * 5) + 5
       });
     };
 

@@ -11,7 +11,10 @@ angular.module('clickQuestApp')
     // Gets a task from the data and constructs it
     exports.getTask = function(taskName) {
       var taskInfo = angular.copy(TaskData[taskName]);
+      return exports.constructTask(taskInfo);
+    };
 
+    exports.constructTask = function(taskInfo) {
       switch(taskInfo.type) {
         case 'task':
           return new Task(taskInfo);
