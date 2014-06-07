@@ -11,7 +11,7 @@ angular.module('clickQuestApp')
       Task.call(this, attr);
 
       this.subTasks = attr.subTasks;
-      attr.duration = this.subTasks.length;
+      this.duration = this.subTasks.length;
       this.type = 'orderedTask';
     };
 

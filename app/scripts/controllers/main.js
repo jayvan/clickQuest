@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('clickQuestApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('MainCtrl', ['$interval', '$scope', 'Character', function ($interval, $scope, Character) {
+    var character = new Character();
+
+    $interval(function() {
+      character.tick();
+    }, 1000);
+  }]);

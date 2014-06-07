@@ -11,6 +11,10 @@ angular
         templateUrl: 'views/edit_tasks.html',
         controller: 'TaskEditCtrl'
       })
+      .when('/', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

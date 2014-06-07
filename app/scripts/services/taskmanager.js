@@ -8,14 +8,8 @@ angular.module('clickQuestApp')
       return JSON.stringify(task.serialize(),{},2);
     };
 
-    exports.getNewTask = function(taskName) {
+    exports.getTask = function(taskName) {
       var taskInfo = angular.copy(TaskData[taskName]);
-
-      if (taskInfo.subTasks) {
-        taskInfo.subTasks = taskInfo.subTasks.map(function(subTaskName) {
-          return exports.getNewTask(subTaskName);
-        });
-      }
 
       switch(taskInfo.type) {
         case 'task':
@@ -27,6 +21,20 @@ angular.module('clickQuestApp')
         case 'randomTask':
           return new RandomTask(taskInfo);
       }
+    };
+
+    exports.getTaskTree = function(taskName) {
+      var taskInfo = angular.copy(TaskData[taskName]);
+      taskInfo.subTasks = taskInfo.subTasks || [];
+
+
+      var subTasks = taskInfo.subTasks.map(function(subTaskName) {
+        return exports.getTaskTree(subTaskName);
+      });
+
+      var task = exports.getTask(taskName);
+      task.subTasks = subTasks;
+      return task;
     };
 
     return exports;

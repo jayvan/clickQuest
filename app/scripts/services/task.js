@@ -19,7 +19,9 @@ angular.module('clickQuestApp')
 
     // Adds progress to the task
     Task.prototype.addProgress = function(ticks) {
+      ticks = ticks || 1;
       this.progress = Math.min(this.progress + ticks, this.duration);
+      console.log(this.name + " is now " + this.progress + "/" + this.duration);
     };
 
     // Returns true if the task is complete, false otherwise
