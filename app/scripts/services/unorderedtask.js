@@ -9,11 +9,11 @@ angular.module('clickQuestApp')
       OrderedTask.call(this, attr);
 
       // shuffle the subtasks
-      for (var i = this.subtasks.length - 1; i > 0; i++) {
+      for (var i = this.subTasks.length - 1; i > 0; i--) {
         var newIndex = Math.floor(Math.random() * i);
-        var tmp = this.subtasks[i];
-        this.subtasks[i] = this.subtasks[newIndex];
-        this.subtasks[newIndex] = tmp;
+        var tmp = this.subTasks[i];
+        this.subTasks[i] = this.subTasks[newIndex];
+        this.subTasks[newIndex] = tmp;
       }
 
       this.type = 'unorderedTask';

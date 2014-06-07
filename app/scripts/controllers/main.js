@@ -7,6 +7,4 @@ angular.module('clickQuestApp')
     $interval(function() {
       $scope.character.tick();
     }, 1000);
-
-
   }]);
