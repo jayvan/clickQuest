@@ -17,7 +17,7 @@ angular.module('clickQuestApp')
     };
 
     Character.prototype.longTasks = function() {
-      return this.tasks.slice(1);
+      return this.tasks.slice(1, this.tasks.length - 1);
     };
 
     // Keep taking on new tasks until we have a base task

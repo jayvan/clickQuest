@@ -2,8 +2,6 @@
 
 angular.module('clickQuestApp')
 .value('TaskData',
-
-
 {
   "root": {
     "name": "root",
@@ -251,5 +249,4 @@ angular.module('clickQuestApp')
     "type": "task"
   }
 }
-
 );
