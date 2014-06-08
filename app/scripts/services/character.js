@@ -6,11 +6,13 @@ angular.module('clickQuestApp')
     // startingTask: The name of the first task the character does
     var Character = function(attr) {
       attr = attr || {};
-      this.name = 'Jayvan' || attr.name;
-      this.race = 'Goblin' || attr.race;
-      this.klass = 'Warrior' || attr.klass;
-      this.level = 1 || attr.level;
-      this.equipment = {} || attr.equipment;
+      this.name = attr.name || 'Jayvan';
+      this.race = attr.race || 'Goblin';
+      this.klass = attr.klass || 'Warrior';
+      this.level = attr.level || 1;
+      this.experienceToLevel = attr.experienceToLevel || 60 * 5;
+      this.experience = attr.experience || 0;
+      this.equipment = attr.equipment || {};
 
       // Starter weapon
       if (this.equipment.weapon === undefined) {
@@ -23,7 +25,7 @@ angular.module('clickQuestApp')
           this.tasks[i] = TaskManager.constructTask(attr.tasks[i]);
         }
       } else {
-        this.tasks.unshift(TaskManager.getTask(attr.startingTask));
+        this.tasks.unshift(TaskManager.getTask(attr.startingTask || 'root'));
       }
 
       this.fillUpTasks();
@@ -70,7 +72,22 @@ angular.module('clickQuestApp')
         var currentTask = this.tasks[0];
         this.tasks.shift();
         this.tasks[0].addProgress(currentTask.reward);
+        this.addExperience(currentTask.reward);
       }
+    };
+
+    Character.prototype.addExperience = function(xp) {
+      this.experience += xp;
+      if (this.experience >= this.experienceToLevel) {
+        this.level++;
+        this.experienceToLevel = Math.round(Math.pow(1.1, this.level) * 20 * 60);
+        this.experience = 0;
+      }
+      console.log('Experience is ' + this.experience + '/' + this.experienceToLevel);
+    };
+
+    Character.prototype.percentToLevel = function() {
+      return Math.round(this.experience / this.experienceToLevel * 100);
     };
 
     // Do progress on the characters active task
@@ -83,7 +100,6 @@ angular.module('clickQuestApp')
       } else {
         this.tasks[0].addProgress(progress);
       }
-
     };
 
     // Get a combat task based on current weapon

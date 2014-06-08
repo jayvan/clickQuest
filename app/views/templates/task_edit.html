@@ -70,6 +70,15 @@
   <span class="glyphicon glyphicon-plus"></span> New Subtask
 </button>
 
+
+<button type="button" class="btn btn-default btn-sm" ng-click="$parent.task.wrapSubTask(task)">
+  <span class="glyphicon glyphicon-compressed"></span> Wrap
+</button>
+
+<button type="button" class="btn btn-default btn-sm" ng-click="$parent.task.unwrapSubTask(task)">
+  <span class="glyphicon glyphicon-fullscreen"></span> Unwrap
+</button>
+
 <button type="button" class="btn btn-default btn-sm" ng-click="$parent.task.removeSubTask(task)">
   <span class="glyphicon glyphicon-trash"></span> Delete
 </button>
@@ -81,11 +90,17 @@
 <button type="button" class="btn btn-default btn-sm" ng-click="$parent.task.demoteSubTask(task)">
   <span class="glyphicon glyphicon-arrow-down"></span> Down
 </button>
+<span>
+  Time: {{task.getEffectiveDuration() | time}}
+</span>
 
 <ul ng-if="task.subTasks.length > 0">
   <p></p>
   <span ng-animate="'animate'" ng-repeat="subTask in task.subTasks">
     <task-edit task="subTask"></task-edit>
+    <button type="button" class="btn btn-default btn-sm" ng-if="$parent.task.type !== 'task' && $parent.task.type !== 'combatTask'" ng-click="$parent.task.addSubTask($index+1)">
+      <span class="glyphicon glyphicon-plus"></span> New Subtask
+    </button>
   </span>
 </ul>
 </li>

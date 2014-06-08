@@ -7,6 +7,12 @@
       </div>
       <div class="panel-body">
         <p ng-click="character.save()">{{character.name}} the {{character.race}} {{character.klass}}</p>
+
+        <h4>Level {{character.level}}</h4>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" ng-style="{width: character.percentToLevel() + '%'}">
+          </div>
+        </div>
       </div>
     </div>
   </div>

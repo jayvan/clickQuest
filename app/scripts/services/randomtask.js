@@ -45,12 +45,12 @@ angular.module('clickQuestApp')
       var sum = 0;
       var weightSum = 0;
       for (var i = 0; i < this.subTasks.length; i++) {
-        sum += this.subTasks[i].getEffectiveDuration() * this.subTasks[i].weight;
+        sum += this.subTasks[i].reward / this.subTasks[i].duration * this.subTasks[i].weight;
         weightSum += this.subTasks[i].weight;
       }
 
       var avg = sum/weightSum;
-      return this.duration / avg;
+      return Math.round(this.duration / avg);
     };
 
     return RandomTask;

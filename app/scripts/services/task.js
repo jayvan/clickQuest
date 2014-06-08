@@ -43,7 +43,7 @@ angular.module('clickQuestApp')
     // e.g. a task that takes 1 second but gives 2 seconds of progress takes
     // a half second effectively
     Task.prototype.getEffectiveDuration = function() {
-      return this.reward / this.duration;
+      return this.duration;
     };
 
     // Returns how long the task takes
@@ -81,9 +81,24 @@ angular.module('clickQuestApp')
       this.subTasks[index] = tmp;
     };
 
-    // Adds a new subtask to the end of the list
-    Task.prototype.addSubTask = function() {
-      this.subTasks.push(new Task());
+    // Adds a new subtask at the given index
+    Task.prototype.addSubTask = function(index) {
+      index = index || 0;
+      this.subTasks.splice(index, 0, new Task());
+    };
+
+    Task.prototype.wrapSubTask = function(oldTask) {
+      var index = this.subTasks.indexOf(oldTask);
+      this.subTasks[index] = new Task();
+      this.subTasks[index].subTasks = [oldTask];
+    };
+
+    Task.prototype.unwrapSubTask = function(oldTask) {
+      var index = this.subTasks.indexOf(oldTask);
+      this.removeSubTask(oldTask);
+      for (var i = oldTask.subTasks.length - 1; i >= 0; i--) {
+        this.subTasks.splice(index, 0, oldTask.subTasks[i]);
+      }
     };
 
     // Serialize the task's raw data for the monsterData file

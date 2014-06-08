@@ -31,8 +31,10 @@ angular.module('clickQuestApp')
     OrderedTask.prototype.getEffectiveDuration = function() {
       var sum = 0;
       for (var i = 0; i < this.subTasks.length; i++) {
-        sum += this.subTasks[i].getDuration();
+        sum += this.subTasks[i].getEffectiveDuration();
       }
+
+      return sum;
     };
 
     OrderedTask.prototype.getDuration = function() {
