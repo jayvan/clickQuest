@@ -101,6 +101,10 @@ angular.module('clickQuestApp')
       }
     };
 
+    Task.prototype.subTaskChance = function(task) {
+      return 0;
+    };
+
     // Serialize the task's raw data for the monsterData file
     Task.prototype.serialize = function(taskData) {
       var getName = function(obj) {

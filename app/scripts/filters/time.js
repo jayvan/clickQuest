@@ -10,17 +10,17 @@ angular.module('clickQuestApp')
 
     return function (input) {
       if (input > month) {
-        return (input / month).toFixed(1) + " months";
+        return (input / month).toFixed(1) + ' months';
       } else if (input > week) {
-        return (input / week).toFixed(1) + " weeks";
+        return (input / week).toFixed(1) + ' weeks';
       }else if (input > day) {
-        return (input / day).toFixed(1) + " days";
+        return (input / day).toFixed(1) + ' days';
       } else if (input > hour) {
-        return (input / hour).toFixed(1) + " hours";
+        return (input / hour).toFixed(1) + ' hours';
       } else if (input > minute) {
-        return (input / minute).toFixed(1) + " minutes";
+        return (input / minute).toFixed(1) + ' minutes';
       }
 
-      return input + " seconds";
+      return input + ' seconds';
     };
   });

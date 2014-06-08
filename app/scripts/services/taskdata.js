@@ -2,7 +2,6 @@
 
 angular.module('clickQuestApp')
 .value('TaskData',
-
 {
   "root": {
     "name": "root",
@@ -138,10 +137,11 @@ angular.module('clickQuestApp')
     "name": "Act 1: Baptism",
     "description": "You've become of age! Time to prove yourself.",
     "weight": 1,
-    "duration": 10,
+    "duration": 2,
     "reward": 10,
     "subTasks": [
-      "Sage's Tasks"
+      "Sage's Tasks",
+      "The Artifact"
     ],
     "type": "orderedTask"
   },
@@ -166,6 +166,7 @@ angular.module('clickQuestApp')
     "reward": 10,
     "subTasks": [
       "Fetid Rat",
+      "Giant Maggot",
       "Green Slime"
     ],
     "type": "randomTask"
@@ -181,6 +182,17 @@ angular.module('clickQuestApp')
     "monster": "Rat",
     "playerTurn": true
   },
+  "Giant Maggot": {
+    "name": "Giant Maggot",
+    "description": "You spot a giant maggot in the shadows, yuck",
+    "weight": 1,
+    "duration": 30,
+    "reward": 30,
+    "subTasks": [],
+    "type": "combatTask",
+    "monster": "Maggot",
+    "playerTurn": true
+  },
   "Green Slime": {
     "name": "Green Slime",
     "description": "A nasty ass slime wriggles it's way over. To arms!",
@@ -190,7 +202,7 @@ angular.module('clickQuestApp')
     "subTasks": [],
     "type": "combatTask",
     "monster": "Slime",
-    "playerTurn": true
+    "playerTurn": false
   },
   "Deliver Letters": {
     "name": "Deliver Letters",
@@ -248,9 +260,9 @@ angular.module('clickQuestApp')
       "Olaf",
       "Wendy",
       "Meishan",
-      "Andrizzle",
-      "Wilson",
-      "Funkle"
+      "Meeting Andrizzle",
+      "Mike",
+      "Jayvan"
     ],
     "type": "unorderedTask"
   },
@@ -258,7 +270,7 @@ angular.module('clickQuestApp')
     "name": "Olaf",
     "description": "Learn about Olaf, the town blacksmith",
     "weight": 1,
-    "duration": 10,
+    "duration": 4,
     "reward": 10,
     "subTasks": [
       "Can't Stand the Heat",
@@ -310,35 +322,386 @@ angular.module('clickQuestApp')
   },
   "Meishan": {
     "name": "Meishan",
-    "description": "Meishan the town pharmacist always has a smile on her face",
+    "description": "It's time to meet Meishan, the town herbalist",
+    "weight": 1,
+    "duration": 4,
+    "reward": 10,
+    "subTasks": [
+      "Meishan's Smile",
+      "Herbal Remedies",
+      "Meishan's Farm",
+      "Meishan's Plant"
+    ],
+    "type": "unorderedTask"
+  },
+  "Meishan's Smile": {
+    "name": "Meishan's Smile",
+    "description": "Meishan bears a big grin, she's always happy - unless she's hungry that is",
     "weight": 1,
     "duration": 15,
     "reward": 10,
     "type": "task"
   },
-  "Andrizzle": {
-    "name": "Andrizzle",
-    "description": "Andrizzle doesn\t have a home, but he has a big heart",
+  "Herbal Remedies": {
+    "name": "Herbal Remedies",
+    "description": "Meishan hands you a wad of green herbs and instructs you to eat it when you're feeling sad",
     "weight": 1,
     "duration": 15,
     "reward": 10,
     "type": "task"
   },
-  "Wilson": {
-    "name": "Wilson",
-    "description": "Wilson always had a way with jewellery, he'd put a ring on almost every woman in town",
+  "Meishan's Farm": {
+    "name": "Meishan's Farm",
+    "description": "Meishan gestures out the window at her farm, you see a variety of herbs and crops growing",
     "weight": 1,
     "duration": 15,
     "reward": 10,
     "type": "task"
   },
-  "Funkle": {
-    "name": "Funkle",
-    "description": "Funkle's name has to change, it's bad",
+  "Meishan's Plant": {
+    "name": "Meishan's Plant",
+    "description": "You eat a fuzzy leaf which seems to cause you extreme flatulence",
     "weight": 1,
     "duration": 15,
     "reward": 10,
     "type": "task"
+  },
+  "Meeting Andrizzle": {
+    "name": "Meeting Andrizzle",
+    "description": "It's time to meet Andrizzle - the local drunk",
+    "weight": 1,
+    "duration": 4,
+    "reward": 10,
+    "subTasks": [
+      "Andrizzle's Addiction",
+      "Andrizzle's High Standards",
+      "Andrizzle's Other Addiction",
+      "Andrizzle's Thoughts"
+    ],
+    "type": "unorderedTask"
+  },
+  "Andrizzle's Addiction": {
+    "name": "Andrizzle's Addiction",
+    "description": "Andrizzle looks you in the eye and asks for another drink - his pockets are a little light",
+    "weight": 1,
+    "duration": 15,
+    "reward": 10,
+    "type": "task"
+  },
+  "Andrizzle's High Standards": {
+    "name": "Andrizzle's High Standards",
+    "description": "Andrizzle gestures at a women in the corner, and tells you how unflattering her appearance is",
+    "weight": 1,
+    "duration": 15,
+    "reward": 10,
+    "type": "task"
+  },
+  "Andrizzle's Other Addiction": {
+    "name": "Andrizzle's Other Addiction",
+    "description": "Andrizzle reaches to his belt and sips from a flask containing an energy potion, that can't mix well with his liquor",
+    "weight": 1,
+    "duration": 15,
+    "reward": 10,
+    "type": "task"
+  },
+  "Andrizzle's Thoughts": {
+    "name": "Andrizzle's Thoughts",
+    "description": "Andrizzle murmurs lyrics to various hymns under his breath",
+    "weight": 1,
+    "duration": 15,
+    "reward": 10,
+    "type": "task"
+  },
+  "Mike": {
+    "name": "Mike",
+    "description": "Time to meet Mike, the village Jeweler",
+    "weight": 1,
+    "duration": 4,
+    "reward": 10,
+    "subTasks": [
+      "Mike's Bling",
+      "Mike's Touch",
+      "Mike's Magic",
+      "Mike's Strength"
+    ],
+    "type": "unorderedTask"
+  },
+  "Mike's Bling": {
+    "name": "Mike's Bling",
+    "description": "You notice Mike has multiple rings on each of his fingers",
+    "weight": 1,
+    "duration": 15,
+    "reward": 10,
+    "type": "task"
+  },
+  "Mike's Touch": {
+    "name": "Mike's Touch",
+    "description": "Mike explains his business, he'd put a ring on almost every woman in town",
+    "weight": 1,
+    "duration": 15,
+    "reward": 10,
+    "type": "task"
+  },
+  "Mike's Magic": {
+    "name": "Mike's Magic",
+    "description": "\"Some call me Magic Mike\", he says, \"I sell all manner of magical rings and amulets\".",
+    "weight": 1,
+    "duration": 15,
+    "reward": 10,
+    "type": "task"
+  },
+  "Mike's Strength": {
+    "name": "Mike's Strength",
+    "description": "Considering he is a Jeweler, Mike has some pretty bulky muscles",
+    "weight": 1,
+    "duration": 15,
+    "reward": 10,
+    "type": "task"
+  },
+  "Jayvan": {
+    "name": "Jayvan",
+    "description": "Jayvan is the village brainiac",
+    "weight": 1,
+    "duration": 4,
+    "reward": 10,
+    "subTasks": [
+      "Jayvan's Ambition",
+      "Jayvan's Research",
+      "Jayvan's Gaze",
+      "Jayvan's Demeanor"
+    ],
+    "type": "unorderedTask"
+  },
+  "Jayvan's Ambition": {
+    "name": "Jayvan's Ambition",
+    "description": "\"I want to help the world with my research\" Jayvan explains",
+    "weight": 1,
+    "duration": 15,
+    "reward": 10,
+    "type": "task"
+  },
+  "Jayvan's Research": {
+    "name": "Jayvan's Research",
+    "description": "Jayvan is trying to find a way to extend the distance of town portals to connect distant villages",
+    "weight": 1,
+    "duration": 15,
+    "reward": 10,
+    "type": "task"
+  },
+  "Jayvan's Gaze": {
+    "name": "Jayvan's Gaze",
+    "description": "Despite looking in your direction, he seems to be distracted in thought, looking through you",
+    "weight": 1,
+    "duration": 15,
+    "reward": 10,
+    "type": "task"
+  },
+  "Jayvan's Demeanor": {
+    "name": "Jayvan's Demeanor",
+    "description": "Despite being a zany scientist, Jayvan explains concepts and his research quite clearly",
+    "weight": 1,
+    "duration": 15,
+    "reward": 10,
+    "type": "task"
+  },
+  "The Artifact": {
+    "name": "The Artifact",
+    "description": "Having completed your tasks for the sage you decide to relax",
+    "weight": 1,
+    "duration": 2,
+    "reward": 10,
+    "subTasks": [
+      "Exploring the Meadow",
+      "Mysterious Cave"
+    ],
+    "type": "orderedTask"
+  },
+  "Exploring the Meadow": {
+    "name": "Exploring the Meadow",
+    "description": "You decide to relax in a meadow",
+    "weight": 1,
+    "duration": 5000,
+    "reward": 10,
+    "subTasks": [
+      "Taking in the sun",
+      "Foraging for Berries",
+      "Napping",
+      "Snakes",
+      "Rabbit"
+    ],
+    "type": "randomTask"
+  },
+  "Taking in the sun": {
+    "name": "Taking in the sun",
+    "description": "The sun feels nice and warm on your skin, this is the life",
+    "weight": 3,
+    "duration": 12,
+    "reward": 24,
+    "type": "task"
+  },
+  "Foraging for Berries": {
+    "name": "Foraging for Berries",
+    "description": "You find some delicious berries and eat them",
+    "weight": 3,
+    "duration": 10,
+    "reward": 10,
+    "type": "task"
+  },
+  "Napping": {
+    "name": "Napping",
+    "description": "You close your eyes and have a short nap",
+    "weight": 1,
+    "duration": 8,
+    "reward": 8,
+    "type": "task"
+  },
+  "Snakes": {
+    "name": "Snakes",
+    "description": "You're getting tired of these darn snakes on this darn plain",
+    "weight": 2,
+    "duration": 10,
+    "reward": 20,
+    "subTasks": [],
+    "type": "combatTask",
+    "monster": "Snake"
+  },
+  "Rabbit": {
+    "name": "Rabbit",
+    "description": "You feel bad, but experience is experience",
+    "weight": 1,
+    "duration": 10,
+    "reward": 10,
+    "subTasks": [],
+    "type": "combatTask",
+    "monster": "Rabbit"
+  },
+  "Mysterious Cave": {
+    "name": "Mysterious Cave",
+    "description": "While exploring the meadow you come across a mysterious cave",
+    "weight": 1,
+    "duration": 2,
+    "reward": 10,
+    "subTasks": [
+      "Exploring the Cave",
+      "The Mysterious Den"
+    ],
+    "type": "orderedTask"
+  },
+  "Exploring the Cave": {
+    "name": "Exploring the Cave",
+    "description": "You explore the cave",
+    "weight": 1,
+    "duration": 5700,
+    "reward": 10,
+    "subTasks": [
+      "Drip Drop",
+      "Clearing Rocks",
+      "Slippery Moss",
+      "Cave Bats",
+      "Wolf Attack",
+      "Wandering"
+    ],
+    "type": "randomTask"
+  },
+  "Drip Drop": {
+    "name": "Drip Drop",
+    "description": "The splash from a nearby stalactite scares you",
+    "weight": 1,
+    "duration": 6,
+    "reward": 6,
+    "type": "task"
+  },
+  "Clearing Rocks": {
+    "name": "Clearing Rocks",
+    "description": "You clear some rocks that block your way",
+    "weight": 1,
+    "duration": 12,
+    "reward": 6,
+    "type": "task"
+  },
+  "Slippery Moss": {
+    "name": "Slippery Moss",
+    "description": "You slip and fall on some moss",
+    "weight": 1,
+    "duration": 8,
+    "reward": 4,
+    "type": "task"
+  },
+  "Cave Bats": {
+    "name": "Cave Bats",
+    "description": "Like warriors of the night, the bats attack",
+    "weight": 2,
+    "duration": 10,
+    "reward": 10,
+    "subTasks": [],
+    "type": "combatTask",
+    "monster": "Bat"
+  },
+  "Wolf Attack": {
+    "name": "Wolf Attack",
+    "description": "You've disturbed the wolf's den",
+    "weight": 1,
+    "duration": 10,
+    "reward": 10,
+    "subTasks": [],
+    "type": "combatTask",
+    "monster": "Wolf"
+  },
+  "Wandering": {
+    "name": "Wandering",
+    "description": "You wander the twisting cold tunnels of the cave system",
+    "weight": 4,
+    "duration": 10,
+    "reward": 10,
+    "type": "task"
+  },
+  "The Mysterious Den": {
+    "name": "The Mysterious Den",
+    "description": "You stumbled into the lair of a sleeping bear",
+    "weight": 1,
+    "duration": 4,
+    "reward": 10,
+    "subTasks": [
+      "Down the rabbit hole",
+      "Shiny Object",
+      "Get Shiny",
+      "The Sleepy Bear"
+    ],
+    "type": "orderedTask"
+  },
+  "Down the rabbit hole": {
+    "name": "Down the rabbit hole",
+    "description": "You suddenly fall through some loose rock into the lair of a sleeping bear",
+    "weight": 1,
+    "duration": 20,
+    "reward": 10,
+    "type": "task"
+  },
+  "Shiny Object": {
+    "name": "Shiny Object",
+    "description": "You notice an an ancient artifact in the corner with a strange symbol on it",
+    "weight": 1,
+    "duration": 10,
+    "reward": 10,
+    "type": "task"
+  },
+  "Get Shiny": {
+    "name": "Get Shiny",
+    "description": "You approach the artifact, as you grab it the sleeping bear awakens",
+    "weight": 1,
+    "duration": 8,
+    "reward": 10,
+    "type": "task"
+  },
+  "The Sleepy Bear": {
+    "name": "The Sleepy Bear",
+    "description": "This bear doesn't look ready for battle, but your presence is irritating him",
+    "weight": 1,
+    "duration": 10,
+    "reward": 10,
+    "subTasks": [],
+    "type": "combatTask",
+    "monster": "Sleepy Bear"
   }
 }
 );

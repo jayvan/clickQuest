@@ -40,6 +40,21 @@ angular.module('clickQuestApp')
       new Error('Random task didn\'t roll a new sub task');
     };
 
+
+    RandomTask.prototype.subTaskChance = function(task) {
+      var taskWeight = 0;
+      var totalWeight = 0;
+
+      for (var i = 0; i < this.subTasks.length; i++) {
+        totalWeight += this.subTasks[i].weight;
+        if (this.subTasks[i] === task) {
+          taskWeight = this.subTasks[i].weight;
+        }
+      }
+
+      return Math.round(taskWeight / totalWeight * 100);
+    };
+
     // Calculates the weighted duration of the event based on subtasks
     RandomTask.prototype.getEffectiveDuration = function() {
       var sum = 0;
