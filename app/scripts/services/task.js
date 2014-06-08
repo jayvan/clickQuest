@@ -14,6 +14,7 @@ angular.module('clickQuestApp')
       this.reward = attrs.reward || 10;
       this.subTasks = [];
       this.progress = attrs.progress || 0;
+      this.callback = attrs.callback;
       this.type = 'task';
     };
 
@@ -101,8 +102,12 @@ angular.module('clickQuestApp')
       }
     };
 
-    Task.prototype.subTaskChance = function(task) {
+    Task.prototype.subTaskChance = function() {
       return 0;
+    };
+
+    Task.prototype.rewardItems = function() {
+      return [];
     };
 
     // Serialize the task's raw data for the monsterData file

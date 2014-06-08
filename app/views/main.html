@@ -6,7 +6,7 @@
         <h3 class='panel-title'>Character</h3>
       </div>
       <div class="panel-body">
-        <p ng-click="character.save()">{{character.name}} the {{character.race}} {{character.klass}}</p>
+        <p ng-click="character.tick(10)">{{character.name}} the {{character.race}} {{character.klass}}</p>
 
         <h4>Level {{character.level}}</h4>
         <div class="progress">
@@ -43,6 +43,26 @@
             </div>
           </div>
         </span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-4'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class='panel-title'>Loot</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <li ng-if="character.gold > 0">
+            {{character.gold}}x Gold Pieces
+          </li>
+          <li ng-repeat="(name, quantity) in character.loot">
+              {{quantity}}x {{name}}
+          </li>
+        </ul>
       </div>
     </div>
 

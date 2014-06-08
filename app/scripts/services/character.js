@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('clickQuestApp')
-  .factory('Character',['ItemManager', 'Task', 'TaskManager', 'WeaponData', function (ItemManager, Task, TaskManager, WeaponData) {
+  .factory('Character',['ItemManager', 'StoreTask', 'Task', 'TaskManager', 'WeaponData', function (ItemManager, StoreTask, Task, TaskManager, WeaponData) {
 
     // startingTask: The name of the first task the character does
     var Character = function(attr) {
@@ -10,6 +10,8 @@ angular.module('clickQuestApp')
       this.race = attr.race || 'Goblin';
       this.klass = attr.klass || 'Warrior';
       this.level = attr.level || 1;
+      this.loot = attr.loot || {};
+      this.gold = attr.gold || 0;
       this.experienceToLevel = attr.experienceToLevel || 60 * 5;
       this.experience = attr.experience || 0;
       this.equipment = attr.equipment || {};
@@ -73,17 +75,54 @@ angular.module('clickQuestApp')
         this.tasks.shift();
         this.tasks[0].addProgress(currentTask.reward);
         this.addExperience(currentTask.reward);
+        this.giveLoot(currentTask.rewardItems());
+        if (currentTask.callback) {
+          currentTask.callback();
+        }
       }
+    };
+
+    Character.prototype.sellLoot = function() {
+      var item = Object.keys(this.loot)[0];
+      this.gold += Math.round(Math.random() * this.level * 5) * this.loot[item];
+      delete this.loot[item];
+    };
+
+    Character.prototype.giveLoot = function(items) {
+      if (items.length == 0) {
+        return;
+      }
+
+      for (var i = 0; i < items.length; i++) {
+        if (this.loot[items[i]] === undefined) {
+          this.loot[items[i]] = 0;
+        }
+
+        this.loot[items[i]]++;
+      }
+
+      if (this.lootCount() >= 25) {
+        this.tasks.unshift(new StoreTask({character: this}));
+      }
+
+    };
+
+    Character.prototype.lootCount = function() {
+      var sum = 0;
+      for (var item in this.loot) {
+        sum += this.loot[item];
+      }
+
+      return sum;
     };
 
     Character.prototype.addExperience = function(xp) {
       this.experience += xp;
       if (this.experience >= this.experienceToLevel) {
         this.level++;
-        this.experienceToLevel = Math.round(Math.pow(1.1, this.level) * 20 * 60);
+        this.experienceToLevel = Math.round(Math.pow(1.1, this.level) * 5 * 60);
         this.experience = 0;
       }
-      console.log('Experience is ' + this.experience + '/' + this.experienceToLevel);
     };
 
     Character.prototype.percentToLevel = function() {

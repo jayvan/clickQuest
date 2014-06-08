@@ -35,5 +35,16 @@ angular.module('clickQuestApp')
       }
     };
 
+    CombatTask.prototype.rewardItems = function() {
+      var rewards = [];
+      for (var i = 0; i < this.monsterData.drops.length; i++) {
+        if(Math.random() < 0.5) {
+          rewards.push(this.monsterData.drops[i]);
+        }
+      }
+
+      return rewards;
+    };
+
     return CombatTask;
   }]);
