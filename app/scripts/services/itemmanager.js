@@ -1,14 +1,26 @@
 'use strict';
 
 angular.module('clickQuestApp')
-  .factory('ItemManager',['WeaponData', function (WeaponData) {
-    var dataSources = [WeaponData];
+  .factory('ItemManager',['BootData', 'ChestData', 'GloveData', 'HelmetData', 'WeaponData', function (BootData, ChestData, GloveData, HelmetData, WeaponData) {
+    var dataSources = [BootData, ChestData, GloveData, HelmetData, WeaponData];
 
     var exports = {};
 
-    exports.generateEquipment = function(type, level) {
-      var hasPrefix = Math.random() < (Math.min(level, 25) / 100);
-      var hasSuffix = Math.random() < (Math.min(level - 25, 25) / 100);
+    exports.generateEquipmentForSlot = function(slot, level) {
+      for (var i = 0; i < dataSources.length; i++) {
+        if (dataSources[i].slot === slot) {
+          var types = dataSources[i].types;
+          var type = types[Math.floor(Math.random() * types.length)];
+          return exports.generateEquipmentOfType(type, level);
+        }
+      }
+
+      new Error("Invalid item slot: " + slot);
+    };
+
+    exports.generateEquipmentOfType = function(type, level) {
+      var hasPrefix = Math.random() < (Math.min(level, 25) / 50);
+      var hasSuffix = Math.random() < (Math.min(level - 25, 25) / 50);
       var slot = null;
       var itemData = null;
 
@@ -28,11 +40,11 @@ angular.module('clickQuestApp')
 
       if (hasPrefix) {
         var prefixIndex = Math.floor(Math.random() * itemData.prefixes.length);
-        name += itemData.prefixes[prefixIndex];
+        name += itemData.prefixes[prefixIndex] + ' ';
       }
 
       var baseIndex = Math.floor(Math.random() * itemData.bases.length);
-      name += ' ' + itemData.bases[baseIndex];
+      name += itemData.bases[baseIndex];
 
       if (hasSuffix) {
         var suffixIndex = Math.floor(Math.random() * itemData.suffixes.length);

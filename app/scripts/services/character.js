@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('clickQuestApp')
-  .factory('Character',['ItemManager', 'StoreTask', 'Task', 'TaskManager', 'WeaponData', function (ItemManager, StoreTask, Task, TaskManager, WeaponData) {
+  .factory('Character',['StoreTask', 'Task', 'TaskManager', 'WeaponData', function (StoreTask, Task, TaskManager, WeaponData) {
 
     // startingTask: The name of the first task the character does
     var Character = function(attr) {
@@ -15,10 +15,15 @@ angular.module('clickQuestApp')
       this.experienceToLevel = attr.experienceToLevel || 60 * 5;
       this.experience = attr.experience || 0;
       this.equipment = attr.equipment || {};
+      this.storeSlots = attr.storeSlots || [];
 
       // Starter weapon
       if (this.equipment.weapon === undefined) {
-        this.equip(ItemManager.generateEquipment('sword', 100));
+        this.equip({
+          type: 'sword',
+          slot: 'weapon',
+          name: 'Stick'
+        });
       }
 
       this.tasks = [];
@@ -101,7 +106,7 @@ angular.module('clickQuestApp')
         this.loot[items[i]]++;
       }
 
-      if (this.lootCount() >= 25) {
+      if (this.lootCount() >= 1) {
         this.tasks.unshift(new StoreTask({character: this}));
       }
 
