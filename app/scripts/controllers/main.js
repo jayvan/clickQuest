@@ -13,6 +13,6 @@ angular.module('clickQuestApp')
     }
 
     $interval(function() {
-      $scope.character.tick(0.1);
-    }, 100);
+      $scope.character.tick(0.05);
+    }, 50);
   }]);

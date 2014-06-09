@@ -15,3 +15,123 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 .progress .bar {
   @include transition(width 5s ease);
 }
+
+.panel-wood {
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  -moz-border-image: url(/images/panel_brown.png) 8 10 9 8 repeat;
+  -webkit-border-image: url(/images/panel_brown.png) 8 10 9 8 repeat;
+  -o-border-image: url(/images/panel_brown.png) 8 10 9 8 repeat;
+  border-image: url(/images/panel_brown.png) 8 10 9 8 fill repeat;
+
+  color: #D3BD86;
+  font-weight: bold;
+
+  hr {
+    border: 1px solid #97714a;
+    border-radius: 25px;
+    margin: 10px;
+  }
+}
+
+.panel-inset-wood {
+  border-style: solid;
+  border-width: 6px 6px 6px 5px;
+  -moz-border-image: url(/images/panelInset_beige.png) 6 6 6 5 repeat;
+  -webkit-border-image: url(/images/panelInset_beige.png) 6 6 6 5 repeat;
+  -o-border-image: url(/images/panelInset_beige.png) 6 6 6 5 repeat;
+  border-image: url(/images/panelInset_beige.png) 6 6 6 5 fill repeat;
+
+  padding: 5px;
+
+  background-color: transparent;
+  color: #67604f;
+}
+
+.panel-inset-stone {
+  border-style: solid;
+  border-width: 6px 6px 6px 5px;
+  -moz-border-image: url(/images/panelInset_brown.png) 6 6 6 5 repeat;
+  -webkit-border-image: url(/images/panelInset_brown.png) 6 6 6 5 repeat;
+  -o-border-image: url(/images/panelInset_brown.png) 6 6 6 5 repeat;
+  border-image: url(/images/panelInset_brown.png) 6 6 6 5 fill repeat;
+
+  padding: 5px;
+
+  background-color: transparent;
+  color: #67604f;
+}
+
+.panel-stone {
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  -moz-border-image: url(/images/panel_blue.png) 8 10 9 8 repeat;
+  -webkit-border-image: url(/images/panel_blue.png) 8 10 9 8 repeat;
+  -o-border-image: url(/images/panel_blue.png) 8 10 9 8 repeat;
+  border-image: url(/images/panel_blue.png) 8 10 9 8 fill repeat;
+
+  color: #E1E5F4;
+  font-weight: bold;
+}
+
+.panel-title {
+  text-align: center;
+  margin-top: 4px;
+}
+
+.progress {
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 25px;
+
+  .progress-bar {
+    border-radius: 25px;
+    background-color: #63cd4b;
+    border: 1px solid #295714;
+
+    transition: none;
+  }
+
+  .progress-bar-blue {
+    background-color: #35BAF3;
+    border: 1px solid #1989B8;
+  }
+}
+
+.panel-body {
+  padding-bottom: 0;
+}
+
+ul {
+  margin-bottom: 0;
+}
+
+body {
+  background-color: rgb(184, 154, 98);
+}
+
+.equipment-list {
+  text-align: center;
+
+  .item {
+    font-weight: normal;
+  }
+}
+
+.button-wood {
+  border-style: solid;
+  border-width: 12px 16px 15px 11px;
+  -moz-border-image: url(/images/buttonLong_brown.png) 8 8 12 7 repeat;
+  -webkit-border-image: url(/images/buttonLong_brown.png) 8 8 12 7 repeat;
+  -o-border-image: url(/images/buttonLong_brown.png) 8 8 12 7 repeat;
+  border-image: url(/images/buttonLong_brown.png) 8 8 12 7 fill;
+  outline: none;
+
+  &:active {
+    transform: scale(0.9, 0.9);
+  }
+
+  background-color: transparent;
+  color: #D3BD86;
+}
+
+

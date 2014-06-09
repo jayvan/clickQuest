@@ -6,8 +6,8 @@ angular.module('clickQuestApp')
     // startingTask: The name of the first task the character does
     var Character = function(attr) {
       attr = attr || {};
-      this.name = attr.name || 'Jayvan';
-      this.race = attr.race || 'Goblin';
+      this.name = attr.name || 'Alpha Tester';
+      this.race = attr.race || 'Centaur';
       this.klass = attr.klass || 'Warrior';
       this.level = attr.level || 1;
       this.loot = attr.loot || {};
@@ -106,7 +106,7 @@ angular.module('clickQuestApp')
         this.loot[items[i]]++;
       }
 
-      if (this.lootCount() >= 1) {
+      if (this.lootCount() >= 25) {
         this.tasks.unshift(new StoreTask({character: this}));
       }
 
