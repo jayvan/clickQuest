@@ -25,6 +25,13 @@ module.exports = function (grunt) {
       dist: 'dist'
     },
 
+    'gh-pages': {
+      options: {
+        base: 'dist',
+      },
+      src: ['**']
+    },
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -374,6 +381,7 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-gh-pages');
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
